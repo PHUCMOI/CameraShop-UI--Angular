@@ -10,12 +10,12 @@
                         <form [formGroup]="signupForm" (ngSubmit)="onSignUp()">   
                             <!-- Phone -->
                             <div class="form-group pt-3">
-                                <div class="input-field" [class.error]="signupForm.controls['phone'].dirty && signupForm.hasError('required', 'phone')">
+                                <div class="input-field" [class.error]="signupForm.controls['phoneNumber'].dirty && signupForm.hasError('required', 'phoneNumber')">
                                     <span class="fa fa-phone p-2"></span>
-                                    <input formControlName="phone" type="text" placeholder="Phone" required>
+                                    <input formControlName="phoneNumber" type="text" placeholder="Phone" required>
                                 </div>
                             </div>    
-                            <small *ngIf="signupForm.controls['phone'].dirty && signupForm.hasError('required','phone')" class="text-danger">*Phone is required*</small>      
+                            <small *ngIf="signupForm.controls['phoneNumber'].dirty && signupForm.hasError('required','phoneNumber')" class="text-danger">*Phone is required*</small>      
                             <!-- Email -->
                             <div class="form-group pt-3">
                                 <div class="input-field" [class.error]="signupForm.controls['email'].dirty && signupForm.hasError('required', 'email')">
@@ -23,7 +23,7 @@
                                     <input formControlName="email" type="text" placeholder="Email" required>
                                 </div>
                             </div>
-                            <small *ngIf="signupForm.controls['phone'].dirty && signupForm.hasError('required','phone')" class="text-danger">*Email is required*</small>      
+                            <small *ngIf="signupForm.controls['email'].dirty && signupForm.hasError('required','email')" class="text-danger">*Email is required*</small>      
                             <!-- Username -->
                             <div class="form-group pt-3">
                                 <div class="input-field" [class.error]="signupForm.controls['username'].dirty && signupForm.hasError('required','username')"> <span class="fa fa-user p-2"></span> 

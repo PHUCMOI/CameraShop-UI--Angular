@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Route, Router } from '@angular/router';
 import validateForm from 'src/app/helpers/validateForm';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-signup',
@@ -14,14 +16,14 @@ export class SignupComponent implements OnInit{
   isText: boolean = false;
   eyeIcon: string = 'fa-eye-slash';
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private signup: UserService, private router: Router) {}
   
   ngOnInit() {
     this.signupForm = this.fb.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
       email: ['', Validators.required],
-      phone: ['', Validators.required]
+      phoneNumber: ['', Validators.required]
     });
   }
 
@@ -34,7 +36,16 @@ export class SignupComponent implements OnInit{
   onSignUp() {
     if(this.signupForm.valid)
     {
-      console.log("oke");
+      console.log(this.signupForm.value)
+      this.signup.signUp(this.signupForm.value).subscribe({
+        next:(res) => {
+          this.signupForm.reset();
+          this.router.navigate(['login']);
+        },
+        error:(err) =>{
+          alert(err?.error.message)
+        }
+      })
     }
     else
     {

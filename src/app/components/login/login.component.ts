@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import validateForm from 'src/app/helpers/validateForm';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,7 @@ export class LoginComponent implements OnInit {
   isText: boolean = false;
   eyeIcon: string = 'fa-eye-slash';
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private login: UserService) {}
 
   ngOnInit() {
     this.loginForm = this.fb.group({
@@ -31,10 +32,18 @@ export class LoginComponent implements OnInit {
   }
 
 
- onSubmit() {
+ onLogin() {
   if(this.loginForm.valid) 
   {
     console.log(this.loginForm.value);
+    this.login.login(this.loginForm.value).subscribe({
+      next:(res) => {
+        (res.message)
+      },
+      error:(err) => {
+        alert(err?.error.message)
+      }
+    })
   }
   else
   {
