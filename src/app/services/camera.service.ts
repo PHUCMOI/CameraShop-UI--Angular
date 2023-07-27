@@ -13,7 +13,6 @@ export class CameraService {
   constructor(private http: HttpClient) { }
 
   public getCamera() : Observable<Camera[]> {
-    console.log(this.http.get<Camera[]>(`${environment.apiUrl}/${this.url}`));
     return this.http.get<Camera[]>(`${environment.apiUrl}/${this.url}`);
   }
 }
